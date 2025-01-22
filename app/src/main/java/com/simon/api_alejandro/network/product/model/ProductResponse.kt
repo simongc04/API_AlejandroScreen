@@ -1,5 +1,6 @@
 package com.simon.api_alejandro.network.product.model
 
+import android.icu.text.CaseMap.Title
 import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(

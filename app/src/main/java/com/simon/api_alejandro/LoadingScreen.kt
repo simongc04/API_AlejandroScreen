@@ -25,27 +25,27 @@ import coil.request.ImageRequest
 
 
 @Composable
-fun LoadingScreen(){
-    Column (
+fun LoadingScreen() {
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Text(
             modifier = Modifier.padding(bottom = 40.dp),
             text = "CARGANDO...",
             fontWeight = FontWeight.Bold,
-            fontSize = TextUnit(8f, TextUnitType.Em),
+            fontSize = TextUnit(8f, TextUnitType.Em)
         )
         LoadingGif()
     }
 }
 
 @Composable
-fun LoadingGif(){
+fun LoadingGif() {
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
-        .components{
+        .components {
             if (Build.VERSION.SDK_INT >= 28) {
                 add(ImageDecoderDecoder.Factory())
             } else {
@@ -63,7 +63,7 @@ fun LoadingGif(){
                         size(400)
                     }
                 ).build(),
-                    imageLoader = imageLoader
+            imageLoader = imageLoader
         ),
         contentDescription = null,
         modifier = Modifier.fillMaxWidth()
