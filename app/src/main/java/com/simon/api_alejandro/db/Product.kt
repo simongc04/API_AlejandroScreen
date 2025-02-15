@@ -1,6 +1,5 @@
 package com.simon.api_alejandro.db
 
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.simon.api_alejandro.network.product.model.ProductResponse
@@ -14,14 +13,13 @@ data class Product(
     var price: Double,
     var discountPercentage: Double,
     val rating: Double,
-    var stock : Int,
-    var brand : String,
+    var stock: Int,
+    var brand: String,
     var category: String,
-    var thumbnail : String
+    var thumbnail: String
 )
 
-
-fun productResponseToProduct(product: ProductResponse): Product{
+fun productResponseToProduct(product: ProductResponse): Product {
     return Product(
         product.id,
         product.title,

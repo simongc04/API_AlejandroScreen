@@ -30,7 +30,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.simon.api_alejandro.db.ProductDatabase
-
 import com.simon.api_alejandro.ui.theme.API_AlejandroTheme
 
 class MainActivity : ComponentActivity() {
@@ -41,36 +40,36 @@ class MainActivity : ComponentActivity() {
             name = "product.db"
         ).build()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             API_AlejandroTheme(dynamicColor = false) {
                 val navController: NavHostController = rememberNavController()
+                val productViewModel: ProductViewModel = viewModel()
                 Scaffold(
                     bottomBar = {
                         BottomAppBar(
                             actions = {
-                                BottomBarItems(navController)
+                                BottomBarItems(navController, productViewModel)
                             }
                         )
                     }
                 ) { innerPadding ->
-                    val productViewModel: ProductViewModel = viewModel()
-                    val context = LocalContext.current
                     NavHost(
                         navController = navController,
                         startDestination = "product_list_screen",
                         modifier = Modifier.fillMaxSize().padding(innerPadding)
                     ) {
                         composable(route = "product_list_screen") {
-                            ProductListScreen(productViewModel, context, innerPadding)
+                            ProductListScreen(productViewModel, LocalContext.current, innerPadding)
                         }
                         composable(route = "favorite_list_screen") {
-                            FavoriteListScreen()
+                            FavoriteListScreen(productViewModel)
                         }
                         composable(route = "search_screen") {
-                            SearchScreen()
+                            SearchScreen(productViewModel)
                         }
                     }
                 }
@@ -80,7 +79,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BottomBarItems(navController: NavController) {
+fun BottomBarItems(navController: NavController, productViewModel: ProductViewModel) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(start = 30.dp, end = 30.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -115,4 +114,3 @@ fun BottomBarItems(navController: NavController) {
         }
     }
 }
-

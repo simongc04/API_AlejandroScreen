@@ -21,8 +21,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
-
-
+import com.simon.api_alejandro.R
 
 @Composable
 fun LoadingScreen() {

@@ -13,3 +13,4 @@ interface ProductCLient {
     suspend fun getProductById(id: Int): Response<ProductResponse>
 
 }
+

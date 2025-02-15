@@ -2,18 +2,23 @@ package com.simon.api_alejandro.network.product
 
 import com.simon.api_alejandro.network.RetrofitHelper
 import com.simon.api_alejandro.network.product.model.ProductListResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import retrofit2.create
+import com.simon.api_alejandro.network.product.model.ProductResponse
+import retrofit2.Response
+import retrofit2.http.GET
+
+interface ProductClient {
+    @GET("/products")
+    suspend fun getAllProducts(): Response<ProductListResponse>
+
+    @GET("/product/{id}")
+    suspend fun getProductById(id: Int): Response<ProductResponse>
+}
 
 class ProductService {
     private val retrofit = RetrofitHelper.getRetrofit()
+    private val api = retrofit.create(ProductClient::class.java)
 
-    suspend fun getAllProducts(): ProductListResponse {
-        return withContext(Dispatchers.IO){
-            val response = retrofit.create(ProductCLient::class.java).getAllProducts()
-            return@withContext response.body()!!
-        }
+    suspend fun getAllProducts(): Response<ProductListResponse> {
+        return api.getAllProducts()
     }
-
 }
